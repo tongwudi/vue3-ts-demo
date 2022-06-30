@@ -37,60 +37,63 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive, toRefs } from "vue";
-import { UserFilled, GoodsFilled } from "@element-plus/icons-vue";
-import type { FormInstance, FormRules } from "element-plus";
+import { defineComponent, ref, reactive, toRefs } from 'vue'
+import { useRouter } from 'vue-router'
+import { UserFilled, GoodsFilled } from '@element-plus/icons-vue'
+import type { FormInstance } from 'element-plus'
+
 export default defineComponent({
   setup() {
-    const loginFormRef = ref();
-    const data = reactive({
+    const loginFormRef = ref<FormInstance>()
+    const state = reactive({
       loginForm: {
-        username: "",
-        password: "",
+        username: '',
+        password: ''
       },
-      rules: <FormRules>{
-        username: [{ required: true, message: "请输入账号", trigger: "blur" }],
+      rules: {
+        username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
         password: [
-          { required: true, message: "请输入密码", trigger: "blur" },
+          { required: true, message: '请输入密码', trigger: 'blur' },
           {
             min: 6,
             max: 12,
-            message: "密码长度应在6到12位之间",
-            trigger: "blur",
-          },
-        ],
-      },
-    });
+            message: '密码长度应在6到12位之间',
+            trigger: 'blur'
+          }
+        ]
+      }
+    })
+    const router = useRouter()
 
     const submitForm = async (formEl: FormInstance | undefined) => {
-      if (!formEl) return;
+      if (!formEl) return
 
       await formEl.validate((valid, fields) => {
         if (valid) {
-          console.log("submit!");
+          router.replace('/')
+          console.log('submit!')
         } else {
-          console.log("error submit!", fields);
+          console.log('error submit!', fields)
         }
-      });
-    };
+      })
+    }
 
     return {
       UserFilled,
       GoodsFilled,
       loginFormRef,
-      ...toRefs(data),
-      submitForm,
-    };
-  },
-});
+      ...toRefs(state),
+      submitForm
+    }
+  }
+})
 </script>
 
 <style lang="scss" scoped>
 .login {
-  position: fixed;
   width: 100%;
   height: 100%;
-  background-image: url("@/assets/img/bg.png");
+  background-image: url('@/assets/img/bg.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
 
@@ -111,7 +114,7 @@ export default defineComponent({
   left: 50%;
   transform: translate(-50%, -50%);
 
-  :deep &__body {
+  ::v-deep &__body {
     padding: 30px 40px;
   }
 }
