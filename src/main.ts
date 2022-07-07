@@ -6,7 +6,7 @@ import store from './store'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
-import '@/assets/style/base.css'
+import '@/assets/styles/index.scss'
 
 const app = createApp(App)
 

@@ -1,6 +1,6 @@
 import { createStore } from 'vuex'
 
-export default createStore({
+const store = createStore({
   state: {
     isCollapse: false
   },
@@ -11,3 +11,5 @@ export default createStore({
   },
   actions: {},
 })
+
+export default store

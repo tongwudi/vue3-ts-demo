@@ -1,0 +1,20 @@
+// 高度
+$barHeight: 60px;
+
+
+// 文字颜色
+$menuTextColor: #fff;
+$menuActiveTextColor: #409eff;
+
+// 背景颜色
+$menuInlineBgColor: #1f2d3d;
+$menuHoverBgColor: #272c36;
+$menuBgColor: #313743;
+
+:export {
+  menuTextColor: $menuTextColor;
+  menuActiveTextColor: $menuActiveTextColor;
+  menuInlineBgColor: $menuInlineBgColor;
+  menuHoverBgColor: $menuHoverBgColor;
+  menuBgColor: $menuBgColor;
+}

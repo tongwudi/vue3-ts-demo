@@ -1,0 +1,9 @@
+.el-menu {
+  border-right: 0;
+}
+.el-menu:not(.el-menu--collapse) {
+  width: 240px;
+}
+.el-menu .el-icon {
+  font-size: 20px;
+}

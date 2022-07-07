@@ -1,13 +1,16 @@
 <template>
-  <div class="logo">
-    <img src="../assets/img/logo.png" />
-  </div>
+  <a class="logo" href="/">
+    <img
+      src="../assets/img/logo.png"
+      :style="{ height: isCollapse ? '50%' : '80%' }"
+    />
+  </a>
   <el-scrollbar>
     <el-menu
       default-active="2-1"
-      background-color="#313743"
-      text-color="#fff"
-      active-text-color="#ffd04b"
+      :background-color="variables.menuBgColor"
+      :text-color="variables.menuTextColor"
+      :active-text-color="variables.menuActiveTextColor"
       :unique-opened="true"
       :collapse-transition="false"
       :collapse="isCollapse"
@@ -42,50 +45,44 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
+import variables from '@/assets/styles/variables.module.scss'
 import {
   Document,
   Menu as IconMenu,
   Location,
   Setting
 } from '@element-plus/icons-vue'
-export default defineComponent({
+
+export default {
   components: { Document, IconMenu, Location, Setting },
   setup() {
     const { state } = useStore()
-
     const isCollapse = computed(() => state.isCollapse)
 
     return {
+      variables,
       isCollapse
     }
   }
-})
+}
 </script>
 
 <style lang="scss" scoped>
 .logo {
+  display: block;
+  font-size: 0; // 去除间隙
+  height: $barHeight;
+  line-height: $barHeight;
   text-align: center;
-  background-color: #313743;
+  background-color: $menuBgColor;
   img {
-    width: 40px;
-    padding: 10px 0;
     vertical-align: middle;
   }
 }
 .el-scrollbar {
-  // height: 100%;
-  height: calc(100% - 60px);
-  background-color: #313743;
-}
-.el-menu {
-  border-right: 0;
-}
-.el-menu:not(.el-menu--collapse) {
-  width: 240px;
-}
-.el-icon {
-  font-size: 24px;
+  height: calc(100% - $barHeight);
+  background-color: $menuBgColor;
 }
 </style>

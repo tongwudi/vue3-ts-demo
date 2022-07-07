@@ -1,24 +1,37 @@
 <template>
-  <el-menu class="header-menu" :ellipsis="false" mode="horizontal">
-    <el-button link @click="changeCollapse">
+  <el-header>
+    <div class="collapse-btn hover-effect" @click="changeCollapse">
       <el-icon :size="24">
         <Expand v-show="isCollapse" />
         <Fold v-show="!isCollapse" />
       </el-icon>
-    </el-button>
-    <el-sub-menu index="1">
-      <template #title>超级管理员</template>
-      <el-menu-item index="1-1">设置</el-menu-item>
-      <el-menu-item index="1-2">个人中心</el-menu-item>
-      <el-menu-item index="1-3" @click="exit">退出</el-menu-item>
-    </el-sub-menu>
-  </el-menu>
+    </div>
+
+    <el-breadcrumb :separator-icon="ArrowRight" separator="/">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>promotion list</el-breadcrumb-item>
+      <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
+    </el-breadcrumb>
+
+    <div class="flex-grow"></div>
+
+    <el-dropdown class="hover-effect">
+      <h3 class="dropdown-text">超级管理员</h3>
+      <template #dropdown>
+        <el-dropdown-menu>
+          <el-dropdown-item>设置</el-dropdown-item>
+          <el-dropdown-item>个人中心</el-dropdown-item>
+          <el-dropdown-item @click="exit">退出</el-dropdown-item>
+        </el-dropdown-menu>
+      </template>
+    </el-dropdown>
+  </el-header>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { Expand, Fold } from '@element-plus/icons-vue'
 import { useStore } from 'vuex'
+import { Expand, Fold, ArrowRight } from '@element-plus/icons-vue'
 
 export default defineComponent({
   components: { Expand, Fold },
@@ -34,6 +47,7 @@ export default defineComponent({
 
     const exit = () => {}
     return {
+      ArrowRight,
       isCollapse,
       changeCollapse,
       exit
@@ -43,15 +57,32 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.header-menu {
-  border-bottom: 0;
-  align-items: center;
-  justify-content: space-between;
-}
-::v-deep .el-sub-menu__title {
+.el-header {
+  height: $barHeight;
   padding: 0;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--el-border-color);
+  box-shadow: var(--el-box-shadow-lighter);
 }
-.el-popper {
-  text-align: center;
+.collapse-btn {
+  height: $barHeight;
+  line-height: $barHeight;
+  padding: 0 15px;
+  color: var(--el-text-color-regular);
+  &:hover {
+    color: var(--color);
+  }
+  .el-icon {
+    vertical-align: middle;
+  }
+}
+.el-breadcrumb {
+  margin-left: 10px;
+}
+.el-dropdown {
+  height: $barHeight;
+  line-height: $barHeight;
+  padding: 0 15px;
 }
 </style>
