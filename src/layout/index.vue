@@ -13,8 +13,8 @@
 </template>
 
 <script lang="ts" setup>
-import sidebar from '@/components/sidebar.vue'
-import navbar from '@/components/navbar.vue'
+import sidebar from './components/sidebar.vue'
+import navbar from './components/navbar.vue'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 const { state } = useStore()

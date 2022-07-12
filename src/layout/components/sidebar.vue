@@ -1,7 +1,7 @@
 <template>
   <a class="logo" href="/" title="桐无敌">
     <img
-      src="../assets/img/logo.png"
+      src="@/assets/img/logo.png"
       :style="{ height: isCollapse ? '40%' : '80%' }"
     />
   </a>
