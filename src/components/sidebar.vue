@@ -1,8 +1,8 @@
 <template>
-  <a class="logo" href="/">
+  <a class="logo" href="/" title="桐无敌">
     <img
       src="../assets/img/logo.png"
-      :style="{ height: isCollapse ? '50%' : '80%' }"
+      :style="{ height: isCollapse ? '40%' : '80%' }"
     />
   </a>
   <el-scrollbar>
@@ -71,18 +71,23 @@ export default {
 
 <style lang="scss" scoped>
 .logo {
-  display: block;
-  font-size: 0; // 去除间隙
   height: $barHeight;
-  line-height: $barHeight;
-  text-align: center;
   background-color: $menuBgColor;
-  img {
-    vertical-align: middle;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .el-scrollbar {
   height: calc(100% - $barHeight);
   background-color: $menuBgColor;
+}
+.el-menu {
+  border-right: 0;
+}
+.el-menu:not(.el-menu--collapse) {
+  width: 240px;
+}
+.el-menu .el-icon {
+  font-size: 20px;
 }
 </style>
