@@ -1,17 +1,16 @@
 <template>
-  <a class="logo" href="/" title="桐无敌">
-    <img
-      src="@/assets/img/logo.png"
-      :style="{ height: isCollapse ? '40%' : '80%' }"
-    />
-  </a>
+  <router-link class="logo" to="/" title="桐无敌">
+    <img :src="logoSrc" />
+    <h1 v-show="!isCollapse">桐无敌</h1>
+  </router-link>
+
   <el-scrollbar>
     <el-menu
       default-active="2-1"
       :background-color="variables.menuBgColor"
       :text-color="variables.menuTextColor"
       :active-text-color="variables.menuActiveTextColor"
-      :unique-opened="true"
+      :unique-opened="false"
       :collapse-transition="false"
       :collapse="isCollapse"
     >
@@ -61,9 +60,12 @@ export default {
     const { state } = useStore()
     const isCollapse = computed(() => state.isCollapse)
 
+    const logoSrc = require('@/assets/img/logo.png')
+
     return {
       variables,
-      isCollapse
+      isCollapse,
+      logoSrc
     }
   }
 }
@@ -71,23 +73,30 @@ export default {
 
 <style lang="scss" scoped>
 .logo {
-  height: $barHeight;
+  display: block;
+  height: $navHeight;
+  line-height: $navHeight;
+  text-align: center;
   background-color: $menuBgColor;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  img {
+    display: inline-block;
+    height: 28px;
+    vertical-align: middle;
+  }
+  h1 {
+    display: inline-block;
+    margin-left: 10px;
+    color: $menuTextColor;
+  }
 }
 .el-scrollbar {
-  height: calc(100% - $barHeight);
+  height: calc(100% - $navHeight);
   background-color: $menuBgColor;
 }
 .el-menu {
   border-right: 0;
 }
 .el-menu:not(.el-menu--collapse) {
-  width: 240px;
-}
-.el-menu .el-icon {
-  font-size: 20px;
+  width: $menuWidth;
 }
 </style>

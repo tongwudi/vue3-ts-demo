@@ -1,27 +1,28 @@
 <template>
   <el-header>
-    <div class="collapse-btn hover-effect" @click="changeCollapse">
+    <div class="collapse-btn hover-effect" @click="toggleCollapse">
       <el-icon :size="24">
         <Expand v-show="isCollapse" />
         <Fold v-show="!isCollapse" />
       </el-icon>
     </div>
 
-    <el-breadcrumb :separator-icon="ArrowRight" separator="/">
+    <!-- <el-breadcrumb separator="/"> -->
+    <el-breadcrumb :separator-icon="ArrowRight">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>promotion list</el-breadcrumb-item>
-      <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
+      <el-breadcrumb-item>商品管理</el-breadcrumb-item>
+      <el-breadcrumb-item>商品列表</el-breadcrumb-item>
     </el-breadcrumb>
 
     <div class="flex-grow"></div>
 
-    <el-dropdown class="hover-effect">
-      <h3 class="dropdown-text">超级管理员</h3>
+    <el-dropdown trigger="click" class="hover-effect">
+      <el-avatar shape="square" :size="40" :src="avatarSrc" />
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item>设置</el-dropdown-item>
           <el-dropdown-item>个人中心</el-dropdown-item>
-          <el-dropdown-item @click="exit">退出</el-dropdown-item>
+          <el-dropdown-item divided @click="exit">退出</el-dropdown-item>
         </el-dropdown-menu>
       </template>
     </el-dropdown>
@@ -29,36 +30,39 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { Expand, Fold, ArrowRight } from '@element-plus/icons-vue'
 
-export default defineComponent({
+export default {
   components: { Expand, Fold },
   setup() {
     const store = useStore()
+    const isCollapse = computed(() => store.state.isCollapse)
 
-    const isCollapse = ref(false)
-
-    const changeCollapse = () => {
-      isCollapse.value = !isCollapse.value
-      store.commit('changeCollapse', isCollapse.value)
+    const toggleCollapse = () => {
+      store.commit('toggleCollapse', !isCollapse.value)
     }
 
+    // const avatarSrc = require('@/assets/img/avatar.png')
+    const avatarSrc = 'https://s2.loli.net/2022/04/07/gw1L2Z5sPtS8GIl.gif?imageView2/1/w/80/h/80'
+
     const exit = () => {}
+
     return {
       ArrowRight,
       isCollapse,
-      changeCollapse,
+      toggleCollapse,
+      avatarSrc,
       exit
     }
   }
-})
+}
 </script>
 
 <style lang="scss" scoped>
 .el-header {
-  height: $barHeight;
+  height: $navHeight;
   padding: 0;
   display: flex;
   align-items: center;
@@ -66,13 +70,9 @@ export default defineComponent({
   box-shadow: var(--el-box-shadow-lighter);
 }
 .collapse-btn {
-  height: $barHeight;
-  line-height: $barHeight;
+  height: $navHeight;
+  line-height: $navHeight;
   padding: 0 15px;
-  color: var(--el-text-color-regular);
-  &:hover {
-    color: var(--color);
-  }
   .el-icon {
     vertical-align: middle;
   }
@@ -81,8 +81,9 @@ export default defineComponent({
   margin-left: 10px;
 }
 .el-dropdown {
-  height: $barHeight;
-  line-height: $barHeight;
+  height: $navHeight;
+  // line-height: $navHeight;
+  align-items: center;
   padding: 0 15px;
 }
 </style>

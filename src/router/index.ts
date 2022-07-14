@@ -10,7 +10,7 @@ const routes: Array<RouteRecordRaw> = [
         path: 'dashboard',
         name: 'Dashboard',
         component: () => import('@/views/Dashboard/index.vue'),
-        // meta: { title: 'dashboard', icon: 'homepage' }
+        meta: { title: '首页', icon: 'homepage' }
       },
     ]
   },
