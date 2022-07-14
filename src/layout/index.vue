@@ -1,20 +1,29 @@
 <template>
-  <el-container class="home">
+  <!-- <el-container class="home"> -->
+  <div class="home">
     <!-- <div v-show="device === 'mobile' && isCollapse"></div> -->
-    <el-aside :width="isCollapse ? '64px' : variables.menuWidth">
+    <el-aside :width="menuWidth">
       <sidebar />
     </el-aside>
-    <el-container direction="vertical">
+
+    <!-- <el-container
+      direction="vertical"
+      class="container"
+      :style="{ marginLeft: menuWidth }"
+    > -->
+    <div class="container" :style="{ marginLeft: menuWidth }">
       <navbar />
       <el-main>
         <router-view></router-view>
       </el-main>
-    </el-container>
-  </el-container>
+    </div>
+    <!-- </el-container> -->
+  </div>
+  <!-- </el-container> -->
 </template>
 
 <script lang="ts" setup>
-import { computed, watch, watchEffect } from 'vue'
+import { ref, computed, watch, watchEffect } from 'vue'
 import { useStore } from 'vuex'
 import { useWindowSize } from '@vueuse/core'
 import sidebar from './components/sidebar.vue'
@@ -25,12 +34,21 @@ const store = useStore()
 const isCollapse = computed(() => store.state.isCollapse)
 const device = computed(() => store.state.app.device)
 
-const { width } = useWindowSize()
-const WIDTH = 990
+let menuWidth = ref('')
+watch(
+  isCollapse,
+  (val) => {
+    menuWidth.value = val ? '64px' : variables.menuOpenWidth
+  },
+  { immediate: true }
+)
 
 watch(device, (val) => {
   store.commit('toggleCollapse', val === 'mobile')
 })
+
+const { width } = useWindowSize()
+const WIDTH = 990
 
 watchEffect(() => {
   if (width.value <= WIDTH) {
@@ -46,7 +64,17 @@ watchEffect(() => {
   height: 100%;
 }
 .el-aside {
-  transition: width 0.25s;
-  overflow: hidden;
+  background-color: $menuBgColor;
+  transition: width 0.2s;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  // overflow: hidden;
+  // z-index: 1001;
+}
+.container {
+  // flex: 1;
+  transition: margin-left 0.2s;
 }
 </style>

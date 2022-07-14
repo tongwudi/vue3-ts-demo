@@ -1,6 +1,6 @@
 // 宽高
-$navHeight: 60px;
-$menuWidth: 220px;
+$navHeight: 56px;
+$menuOpenWidth: 210px;
 
 
 // 文字颜色
@@ -17,7 +17,7 @@ $menuBgColor: #313743;
 
 :export {
   navHeight: $navHeight;
-  menuWidth: $menuWidth;
+  menuOpenWidth: $menuOpenWidth;
   menuTextColor: $menuTextColor;
   menuActiveTextColor: $menuActiveTextColor;
   menuInlineBgColor: $menuInlineBgColor;

@@ -6,7 +6,7 @@
 
   <el-scrollbar>
     <el-menu
-      default-active="2-1"
+      default-active="4"
       :background-color="variables.menuBgColor"
       :text-color="variables.menuTextColor"
       :active-text-color="variables.menuActiveTextColor"
@@ -74,29 +74,24 @@ export default {
 <style lang="scss" scoped>
 .logo {
   display: block;
-  height: $navHeight;
+  height: $navHeight; // 大于等于58会影响transition
   line-height: $navHeight;
   text-align: center;
-  background-color: $menuBgColor;
   img {
-    display: inline-block;
-    height: 28px;
+    height: 30px;
     vertical-align: middle;
   }
   h1 {
     display: inline-block;
     margin-left: 10px;
+    vertical-align: middle;
     color: $menuTextColor;
   }
 }
 .el-scrollbar {
   height: calc(100% - $navHeight);
-  background-color: $menuBgColor;
 }
 .el-menu {
   border-right: 0;
-}
-.el-menu:not(.el-menu--collapse) {
-  width: $menuWidth;
 }
 </style>
