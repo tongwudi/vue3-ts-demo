@@ -74,7 +74,6 @@ watchEffect(() => {
   // z-index: 1001;
 }
 .container {
-  // flex: 1;
   transition: margin-left 0.2s;
 }
 </style>
