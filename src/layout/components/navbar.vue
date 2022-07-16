@@ -1,7 +1,7 @@
 <template>
   <el-header>
     <div class="collapse-btn hover-effect" @click="toggleCollapse">
-      <el-icon :size="24">
+      <el-icon :size="20">
         <Expand v-show="isCollapse" />
         <Fold v-show="!isCollapse" />
       </el-icon>
@@ -16,7 +16,7 @@
     <div class="flex-grow"></div>
 
     <el-dropdown trigger="click" class="hover-effect">
-      <el-avatar shape="square" :size="40" :src="avatarSrc" />
+      <el-avatar shape="square" :size="34" :src="avatarSrc" />
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item>设置</el-dropdown-item>

@@ -74,7 +74,7 @@ export default {
 <style lang="scss" scoped>
 .logo {
   display: block;
-  height: $navHeight; // 大于等于58会影响transition
+  height: $navHeight;
   line-height: $navHeight;
   text-align: center;
   img {

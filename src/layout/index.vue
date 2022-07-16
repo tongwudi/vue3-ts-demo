@@ -1,25 +1,21 @@
 <template>
-  <!-- <el-container class="home"> -->
-  <div class="home">
+  <el-container class="home">
     <!-- <div v-show="device === 'mobile' && isCollapse"></div> -->
     <el-aside :width="menuWidth">
       <sidebar />
     </el-aside>
 
-    <!-- <el-container
+    <el-container
       direction="vertical"
       class="container"
       :style="{ marginLeft: menuWidth }"
-    > -->
-    <div class="container" :style="{ marginLeft: menuWidth }">
+    >
       <navbar />
       <el-main>
         <router-view></router-view>
       </el-main>
-    </div>
-    <!-- </el-container> -->
-  </div>
-  <!-- </el-container> -->
+    </el-container>
+  </el-container>
 </template>
 
 <script lang="ts" setup>
