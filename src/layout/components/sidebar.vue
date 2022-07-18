@@ -1,8 +1,5 @@
 <template>
-  <router-link class="logo" to="/" title="桐无敌">
-    <img :src="logoSrc" />
-    <h1 v-show="!isCollapse">桐无敌</h1>
-  </router-link>
+  <Logo />
 
   <el-scrollbar>
     <el-menu
@@ -19,17 +16,17 @@
           <el-icon><Location /></el-icon>
           <span>Navigator One</span>
         </template>
-        <el-menu-item index="1-1">item one</el-menu-item>
-        <el-menu-item index="1-2">item two</el-menu-item>
-        <el-menu-item index="1-3">item three</el-menu-item>
+        <el-menu-item index="1-1">one</el-menu-item>
+        <el-menu-item index="1-2">two</el-menu-item>
+        <el-menu-item index="1-3">three</el-menu-item>
       </el-sub-menu>
       <el-sub-menu index="2">
         <template #title>
           <el-icon><IconMenu /></el-icon>
           <span>Navigator Two</span>
         </template>
-        <el-menu-item index="2-1">item one</el-menu-item>
-        <el-menu-item index="2-2">item two</el-menu-item>
+        <el-menu-item index="2-1">four</el-menu-item>
+        <el-menu-item index="2-2">five</el-menu-item>
       </el-sub-menu>
       <el-menu-item index="3">
         <el-icon><Document /></el-icon>
@@ -43,55 +40,28 @@
   </el-scrollbar>
 </template>
 
-<script lang="ts">
-import { computed } from 'vue'
-import { useStore } from 'vuex'
-import variables from '@/assets/styles/variables.module.scss'
+<script setup lang="ts">
+import { inject } from 'vue'
 import {
   Document,
   Menu as IconMenu,
   Location,
   Setting
 } from '@element-plus/icons-vue'
+import Logo from './logo.vue'
+import variables from '@/assets/styles/variables.module.scss'
 
-export default {
-  components: { Document, IconMenu, Location, Setting },
-  setup() {
-    const { state } = useStore()
-    const isCollapse = computed(() => state.isCollapse)
-
-    const logoSrc = require('@/assets/img/logo.png')
-
-    return {
-      variables,
-      isCollapse,
-      logoSrc
-    }
-  }
-}
+const isCollapse = inject('isCollapse')
 </script>
 
 <style lang="scss" scoped>
-.logo {
-  display: block;
-  height: $navHeight;
-  line-height: $navHeight;
-  text-align: center;
-  img {
-    height: 30px;
-    vertical-align: middle;
-  }
-  h1 {
-    display: inline-block;
-    margin-left: 10px;
-    vertical-align: middle;
-    color: $menuTextColor;
-  }
-}
 .el-scrollbar {
   height: calc(100% - $navHeight);
 }
 .el-menu {
   border-right: 0;
 }
+// .el-menu:not(.el-menu--collapse) {
+//   width: $menuOpenWidth;
+// }
 </style>

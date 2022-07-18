@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, watch, watchEffect } from 'vue'
+import { ref, computed, watch, watchEffect, provide } from 'vue'
 import { useStore } from 'vuex'
 import { useWindowSize } from '@vueuse/core'
 import sidebar from './components/sidebar.vue'
@@ -27,9 +27,9 @@ import navbar from './components/navbar.vue'
 import variables from '@/assets/styles/variables.module.scss'
 
 const store = useStore()
-const isCollapse = computed(() => store.state.isCollapse)
-const device = computed(() => store.state.app.device)
 
+const isCollapse = computed(() => store.state.isCollapse)
+provide('isCollapse', isCollapse)
 let menuWidth = ref('')
 watch(
   isCollapse,
@@ -39,6 +39,7 @@ watch(
   { immediate: true }
 )
 
+const device = computed(() => store.state.device)
 watch(device, (val) => {
   store.commit('toggleCollapse', val === 'mobile')
 })
@@ -47,11 +48,8 @@ const { width } = useWindowSize()
 const WIDTH = 990
 
 watchEffect(() => {
-  if (width.value <= WIDTH) {
-    store.commit('app/toggleDevice', 'mobile')
-  } else {
-    store.commit('app/toggleDevice', 'desktop')
-  }
+  const device = width.value <= WIDTH ? 'mobile' : 'desktop'
+  store.commit('toggleDevice', device)
 })
 </script>
 
